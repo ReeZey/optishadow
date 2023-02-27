@@ -22,19 +22,19 @@ async function main() {
             continue;
         }
     
-        let isDir = statSync(input).isDirectory();
+        let isDir = statSync(currentArg).isDirectory();
         if (isDir) {
-            for await (let fileName of getFiles(input)) {
+            for await (let fileName of getFiles(currentArg)) {
                 await convertMedia(fileName);
             }
         } else {
-            await convertMedia(input);
+            await convertMedia(currentArg);
         }
     }
     
-    console.log("all done, press any button to exit");
-    //setTimeout(() => {}, 5000);
-    process.stdout.resume();
+    console.log("all done");
+    setTimeout(() => {}, 5000);
+    //process.stdin.resume();
 }
 main();
 
@@ -44,7 +44,7 @@ async function convertMedia(fileName){
         let code = await optimiseMedia(fileName);
         if (code != 0) {
             console.log("an error occured when reading file, probably ffmpeg doesn't understand format");
-            rej();
+            return res();
         }
         console.log("done!");
         await moveMedia(fileName);
