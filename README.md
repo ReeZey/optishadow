@@ -14,4 +14,12 @@ during convertion it stores the video in same directory as `optishadow.exe` and 
 example: `optishadow.exe "input.mp4"`  
 will convert the video to a more optimized media
 
-its also possible to drag&drop a media file or directory ontop of the `optishadow.exe`
+its also possible to drag&drop a media file or directory ontop of the `optishadow.exe`  
+
+# installation / build
+
+follow one of these steps:
+- download the binaries from the release tab
+- build them yourself from source (weirdo)  
+install `pkg` or the packager of your choosing with `npm install pkg -g`  
+then: `pkg index.js -t node18-win -o optishadow`
