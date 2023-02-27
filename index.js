@@ -19,7 +19,7 @@ async function main() {
     
         if (!existsSync(currentArg)) {
             console.log(`"${currentArg}" - file/directory not found`);
-            exit(0);
+            continue;
         }
     
         let isDir = statSync(input).isDirectory();
@@ -32,10 +32,10 @@ async function main() {
         }
     }
     
-    console.log("all done");
-    setTimeout(() => {}, 5000);
+    console.log("all done, press any button to exit");
+    //setTimeout(() => {}, 5000);
+    process.stdout.resume();
 }
-
 main();
 
 async function convertMedia(fileName){
@@ -43,12 +43,12 @@ async function convertMedia(fileName){
         console.log(fileName);
         let code = await optimiseMedia(fileName);
         if (code != 0) {
-            console.log("error :(");
-            rej("error");
+            console.log("an error occured when reading file, probably ffmpeg doesn't understand format");
+            rej();
         }
         console.log("done!");
         await moveMedia(fileName);
-        
+
         res();
     });
 }
